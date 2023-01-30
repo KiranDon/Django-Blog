@@ -1,0 +1,101 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+    <link rel="stylesheet" href="{% static 'post.css' %}">
+</head>
+<body>
+    {% include "navbar.html" %}
+    
+    <div class="gradient"></div>
+
+    <div class="allCenter">
+        <div class="top">
+            <p class="dateAndAuthor">{{ post.created_at }} &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 8 minues read</p>
+            <h1 class="title">{{ post.title }}</h1>
+            <div class="tags">
+                <p>{{ post.author }}</p>
+                <div class="right">
+                    <p>tag</p>
+                    <p>another tag</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="imageBlock">
+            <img src="{% static 'img/blog.jpg' %}" alt="img" class="smallImg" style="width: 100%; height: 500px;">
+        </div>
+
+        <div class="content">
+            <!-- {{ post.content }} -->
+            {% for para in post.split_content %}
+                {{para}}<br><br><br>
+            {% endfor %}
+        </div>
+
+
+        {% if user.is_authenticated %}
+            <div class="addComment">
+                <h1>Add a comment</h1>
+                <form action="/addComment" method="post">
+                    {% csrf_token %}
+                    <textarea name="comment" id="comment" cols="95" rows="3"></textarea>
+                    <br>
+                    <input type="hidden" name="post" value="{{post.id}}">
+                    <input type="hidden" name="comment_by" value="{{user.username}}">
+                    <input type="submit" value="Add Comment" id="submit">
+                </form>
+            </div>
+        {% else %}
+            <div class="addComment">
+                <h1>Login to add comments.</h1>
+            </div>
+        {% endif %}
+
+        
+
+        <hr>
+        
+
+        <div class="comments">
+            <h2>Comments:</h2>
+
+            {% for comment in comments %}
+                {% if comment.post == current_post %}
+                    <div class="comment">
+                        <h3>{{comment.comment_by}}</h3>
+                        <p>{{comment.comment}}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+    
+            <!-- <div class="comment">
+                <h3>KiranDon</h3>
+                <p>Wow. Great tutorial.</p>
+            </div>
+            <div class="comment">
+                <h3>KiranDon</h3>
+                <p>Wow. Great tutorial.</p>
+            </div>
+            <div class="comment">
+                <h3>KiranDon</h3>
+                <p>Wow. Great tutorial.</p>
+            </div>
+            <div class="comment">
+                <h3>KiranDon</h3>
+                <p>Wow. Great tutorial.</p>
+            </div> -->
+        </div>
+
+
+    </div>
+
+
+
+</body>
+</html>

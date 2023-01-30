@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    background-color: #F1F3F6;
+}
+.posts{
+    width: 100%;
+    padding: 70px 10% 0;
+}
+.posts .post{
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+.posts .post .left{
+    width: 60%;
+    /* border: 1px solid black; */
+}
+.posts .post .right{
+    /* border: 1px solid black; */
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.smallImg{
+    width: 100%;
+    transform: scale(0.6);
+}
+
+.dateAndAuthor, .title, .content, .linkToPost{
+    margin: 20px 0;
+}
+.linkToPost{
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+.linkToPost span{
+    color: blue;
+    font-size: 20px;
+    font-weight: bold;
+}
